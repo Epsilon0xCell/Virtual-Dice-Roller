@@ -64,14 +64,14 @@ class Session:
 
     def do_roll(self, expr):
         rolls, modifier, total = roll(expr, self.rng)
-        self.history.append((expr, rolls, total))
+        self.history.append((expr, rolls, modifier, total))
         return describe(expr, rolls, modifier, total)
 
     def stats(self):
         if not self.history:
             return "No rolls yet."
-        totals = [t for _, _, t in self.history]
-        dice = sum(len(r) for _, r, _ in self.history)
+        totals = [t for _, _, _, t in self.history]
+        dice = sum(len(r) for _, r, _, _ in self.history)
         return ("Rolls: {} expressions, {} dice | min {} | max {} | "
                 "average {:.2f} | total {}".format(
                     len(self.history), dice, min(totals), max(totals),
@@ -97,8 +97,10 @@ def interactive(rng=random):
             print(session.stats())
             continue
         if cmd == "history":
-            for expr, rolls, total in session.history:
-                print("  {}: [{}] = {}".format(expr, ", ".join(map(str, rolls)), total))
+            if not session.history:
+                print("No rolls yet.")
+            for expr, rolls, modifier, total in session.history:
+                print("  " + describe(expr, rolls, modifier, total))
             continue
         try:
             print(session.do_roll(raw))
