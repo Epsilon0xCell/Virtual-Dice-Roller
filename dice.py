@@ -47,11 +47,19 @@ def parse(expr):
     # I bound count and sides here, after the parse and before any roll.
     # Count sets how long the rolls list gets in roll(), and sides sets
     # the randint range, so these two are the inputs I do not let through
-    # unchecked. The modifier only gets added to a finished sum.
+    # unchecked. The modifier is bounded just below, for a different
+    # reason: it cannot break the roll, only produce a silly total.
     if count < 1 or count > 1000:
         raise ValueError("dice count must be between 1 and 1000")
     if sides < 2 or sides > 10000:
         raise ValueError("dice sides must be between 2 and 10000")
+    # The modifier gets a bound too, as of this pass. Count and sides were
+    # capped from the start, but the modifier slipped through unchecked:
+    # 3d6+999999999999 parsed and printed a total over a trillion, which is
+    # a typo shape, not a roll anyone means. A million is far past any
+    # modifier a real game uses, so nothing honest is lost by capping it.
+    if abs(modifier) > 1000000:
+        raise ValueError("modifier must be between -1000000 and 1000000")
     return count, sides, modifier
 
 
@@ -118,6 +126,13 @@ def interactive(rng=random):
             # stats line after the loop still prints. Quit lands there
             # too. If I returned on EOF, a closed pipe would end the
             # session with no summary at all.
+            print()
+            break
+        except KeyboardInterrupt:
+            # Ctrl-C gets the same clean exit as EOF. Before this, it
+            # escaped input() as a traceback and the session ended with
+            # no stats line, which made an ordinary way of leaving look
+            # like a crash.
             print()
             break
         if not raw:

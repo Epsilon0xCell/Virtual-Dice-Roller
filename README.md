@@ -17,8 +17,11 @@ Requirements: Python 3, standard library only.
 | `1d8-1`    | roll 1d8 and subtract 1        |
 | `4`        | roll 4 six-sided dice          |
 
-Limits: 1 to 1000 dice, 2 to 10000 sides. An expression outside those limits
-or in any other format is rejected with an error message.
+Limits: 1 to 1000 dice, 2 to 10000 sides, and a modifier between
+-1000000 and 1000000. An expression outside those limits or in any other
+format is rejected with an error message. A modifier can pull a total
+below zero: `1d2-5` can print a negative total, and that is allowed on
+purpose, since some games use negative results. Nothing clamps it.
 
 ## Run
 
@@ -52,12 +55,13 @@ Run with no arguments. Type any dice expression to roll it. Commands:
 
 An invalid expression in interactive mode prints an error and the session
 continues. Typing `history` or `stats` before any roll prints
-`No rolls yet.` Closing input (EOF) ends the session and prints the final
-stats. Exit status is 0.
+`No rolls yet.` Closing input (EOF) or pressing Ctrl-C ends the session
+and prints the final stats. Exit status is 0.
 
 ## Files
 
 - `dice.py` - the whole program
+- `test_dice.py` - the test suite, run with `python3 -m unittest`
 - `logo.png`, `banner.png` - project branding
 - `LICENSE` - MIT license
 
