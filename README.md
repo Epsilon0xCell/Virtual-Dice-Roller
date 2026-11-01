@@ -1,11 +1,19 @@
-![Virtual Dice Roller banner](banner.png)
+![Intro scenery: cracked playa polygons, rippled salt, agave rosettes and mesa strata under a white sky](intro-banner.png)
 
 # Virtual-Dice-Roller
+
+![Wordmark banner: the trail register open on a camp table at the playa edge](banner.png)
+
+![Animated scene: star wheel over fixed mesas, ripples stepping, a tumbleweed crossing](scene.svg)
+
+
 
 A dice roller in Python. Roll standard dice notation from the command line or
 in an interactive session with history and statistics.
 
 Requirements: Python 3, standard library only.
+
+![Separator](sep-heavy.svg)
 
 ## Notation
 
@@ -21,7 +29,11 @@ Limits: 1 to 1000 dice, 2 to 10000 sides, and a modifier between
 -1000000 and 1000000. An expression outside those limits or in any other
 format is rejected with an error message. A modifier can pull a total
 below zero: `1d2-5` can print a negative total, and that is allowed on
+
+> **Field note:** a modifier may pull a total below zero, totals are not clamped, and that is allowed on purpose.
 purpose, since some games use negative results. Nothing clamps it.
+
+![Separator](sep-heavy.svg)
 
 ## Run
 
@@ -43,7 +55,11 @@ $ python3 dice.py --seed 42 4d6 2d20+5 1d8-1
 
 In batch mode, rolls are printed in order. If an expression is invalid, the
 program prints `Error: ...` to stderr, stops, and exits with status 2. Rolls
+
+> **Field note:** batch mode exits with status 2 on the first invalid expression, and rolls already printed stay printed.
 already printed before the bad expression stay printed.
+
+![Separator](sep-heavy.svg)
 
 ## Interactive mode
 
@@ -58,12 +74,16 @@ continues. Typing `history` or `stats` before any roll prints
 `No rolls yet.` Closing input (EOF) or pressing Ctrl-C ends the session
 and prints the final stats. Exit status is 0.
 
+![Separator](sep-heavy.svg)
+
 ## Files
 
 - `dice.py` - the whole program
 - `test_dice.py` - the test suite, run with `python3 -m unittest`
 - `logo.png`, `banner.png` - project branding
 - `LICENSE` - MIT license
+
+![Separator](sep-heavy.svg)
 
 ## License
 
