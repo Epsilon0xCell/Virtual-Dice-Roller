@@ -1,8 +1,10 @@
-![Intro scenery: cracked playa polygons, rippled salt, agave rosettes and mesa strata under a white sky](intro-banner.png)
+![Intro scenery: the last die of a throw tipping onto its edge as it comes to rest against a neat settled row of ivory dice on green felt, the dice behind softening out of focus](intro-banner.png)
 
 # Virtual-Dice-Roller
 
-![Wordmark banner: the trail register open on a camp table at the playa edge](banner.png)
+![Wordmark banner: a scatter of ivory dice caught at every stage of one throw across green felt, several still bouncing in from the left and the rest settled showing their faces at the right](banner.png)
+
+<p align="center"><img src="logo.png" alt="Virtual-Dice-Roller logo: two ivory dice frozen mid tumble above green felt, their black pips sharp and one die still turning in the air, the photograph ringed by a black and gold circular frame" width="200"></p>
 
 ![Animated scene: star wheel over fixed mesas, ripples stepping, a tumbleweed crossing](scene.svg)
 
